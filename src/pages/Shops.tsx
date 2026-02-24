@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTenants, updateTenant } from "@/lib/store";
 import { Tenant, formatINR } from "@/lib/types";
+import { getRentUrgency, urgencyStyles, urgencyBadge } from "@/lib/rentStatus";
 import { ChevronRight, Pencil, X, Check } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 
@@ -41,7 +42,7 @@ export default function Shops() {
         <h2 className="text-xl font-bold text-foreground">Shops & Tenants</h2>
 
         {tenants.map((t) => (
-          <div key={t.id} className="stat-card">
+          <div key={t.id} className={`stat-card ${urgencyStyles(getRentUrgency(t))}`}>
             {editing === t.id ? (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -109,6 +110,12 @@ export default function Shops() {
                     }`}>
                       {t.status}
                     </span>
+                    {(() => {
+                      const badge = urgencyBadge(getRentUrgency(t));
+                      return badge ? (
+                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${badge.className}`}>{badge.label}</span>
+                      ) : null;
+                    })()}
                   </div>
                   {t.status === "occupied" && (
                     <div className="mt-1">
