@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { getTenants, getPayments, isMonthPaid } from "@/lib/store";
 import { formatINR, MONTHS } from "@/lib/types";
 import { getRentUrgency, urgencyStyles, urgencyBadge } from "@/lib/rentStatus";
-import { Store, UserCheck, UserX, IndianRupee, AlertCircle, ChevronRight } from "lucide-react";
+import { Store, UserCheck, UserX, IndianRupee, AlertCircle, ChevronRight, Banknote } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import AppLayout from "@/components/AppLayout";
 
 export default function Dashboard() {
@@ -103,7 +104,21 @@ export default function Dashboard() {
                     </div>
                     <div className="text-sm text-muted-foreground">{formatINR(t.monthlyRent)} due by {t.rentDueDay}th</div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="default"
+                      className="text-xs h-7 px-3"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/payments?tenant=${t.id}`);
+                      }}
+                    >
+                      <Banknote className="w-3 h-3 mr-1" />
+                      Collect
+                    </Button>
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
                 </button>
               ))}
             </div>
