@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTenants, getPayments, isMonthPaid } from "@/lib/store";
 import { formatINR, MONTHS } from "@/lib/types";
+import { getRentUrgency, urgencyStyles, urgencyBadge } from "@/lib/rentStatus";
 import { Store, UserCheck, UserX, IndianRupee, AlertCircle, ChevronRight } from "lucide-react";
 import AppLayout from "@/components/AppLayout";
 
@@ -88,10 +89,18 @@ export default function Dashboard() {
                 <button
                   key={t.id}
                   onClick={() => navigate(`/tenant/${t.id}`)}
-                  className="stat-card w-full flex items-center justify-between hover:border-primary/30 transition-colors"
+                  className={`stat-card w-full flex items-center justify-between hover:border-primary/30 transition-colors ${urgencyStyles(getRentUrgency(t))}`}
                 >
                   <div className="text-left">
-                    <div className="font-medium text-foreground">Shop {t.shopNumber} – {t.name}</div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-foreground">Shop {t.shopNumber} – {t.name}</span>
+                      {(() => {
+                        const badge = urgencyBadge(getRentUrgency(t));
+                        return badge ? (
+                          <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${badge.className}`}>{badge.label}</span>
+                        ) : null;
+                      })()}
+                    </div>
                     <div className="text-sm text-muted-foreground">{formatINR(t.monthlyRent)} due by {t.rentDueDay}th</div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
