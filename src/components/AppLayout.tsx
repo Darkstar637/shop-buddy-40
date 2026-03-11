@@ -24,7 +24,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-background">
       {/* Top bar */}
       <header className="sticky top-0 z-30 bg-card border-b border-border px-4 py-3 flex items-center justify-between">
-        <h1 className="text-lg font-bold text-foreground">RentManager</h1>
+        <div className="flex items-center gap-2">
+          <img src={logo} alt="RentManager" className="w-8 h-8 rounded-full" />
+          <h1 className="text-lg font-bold text-foreground">RentManager</h1>
+        </div>
         <button onClick={handleLogout} className="text-muted-foreground p-2 hover:text-foreground transition-colors">
           <LogOut className="w-5 h-5" />
         </button>

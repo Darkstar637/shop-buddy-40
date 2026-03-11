@@ -23,9 +23,7 @@ export default function Login() {
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="w-full max-w-xs">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-primary" />
-          </div>
+          <img src={logo} alt="RentManager Logo" className="w-20 h-20 rounded-full mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-foreground">RentManager</h1>
           <p className="text-muted-foreground text-sm mt-1">Enter PIN to continue</p>
         </div>
