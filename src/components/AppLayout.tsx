@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Store, CreditCard, BarChart3, LogOut } from "lucide-react";
 import { setAuthenticated } from "@/lib/store";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { path: "/", icon: LayoutDashboard, label: "Home" },
