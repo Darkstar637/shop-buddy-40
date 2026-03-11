@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getPin, setAuthenticated } from "@/lib/store";
-import { Lock } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export default function Login() {
   const [pin, setPin] = useState("");
